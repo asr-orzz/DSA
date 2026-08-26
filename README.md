@@ -21,6 +21,14 @@ DSARevision/
 │   ├── 05_Connectivity/
 │   └── 06_Advanced/
 └── Trees/                # tree-specific algorithms (separate from Graphs)
+    ├── 01_Basics/
+    ├── 02_Properties/
+    ├── 03_PathQueries/
+    ├── 04_Flattening/
+    ├── 05_QueriesOnTree/
+    ├── 06_Decomposition/
+    ├── 07_TreeDP/
+    └── 08_Advanced/
 ```
 
 ## How to Study
@@ -53,11 +61,18 @@ DSARevision/
 | [05_Connectivity](Graphs/README.md#05_connectivity) | 3 | Kosaraju, bridges, articulation points |
 | [06_Advanced](Graphs/README.md#06_advanced) | 3 | Euler path, Dinic, 2-SAT |
 
-### [Trees](Trees/README.md) — 1 template
+### [Trees](Trees/README.md) — 13 templates
 
-| Algo | File | Use |
-|------|------|-----|
-| LCA (Binary Lifting) | [`Trees/lca.cpp`](Trees/lca.cpp) | Ancestor queries, tree distances |
+| Section | Count | Covers |
+|---------|-------|--------|
+| [01_Basics](Trees/README.md#01_basics) | 1 | Tree DFS (par, depth, height, subtree) |
+| [02_Properties](Trees/README.md#02_properties) | 3 | Diameter, center, centroid |
+| [03_PathQueries](Trees/README.md#03_pathqueries) | 1 | LCA, k-ancestor, distance, k-th on path |
+| [04_Flattening](Trees/README.md#04_flattening) | 1 | Euler tour (tin/tout) |
+| [05_QueriesOnTree](Trees/README.md#05_queriesontree) | 2 | HLD, virtual tree |
+| [06_Decomposition](Trees/README.md#06_decomposition) | 1 | Centroid decomposition |
+| [07_TreeDP](Trees/README.md#07_treedp) | 2 | Basic tree DP, rerooting DP |
+| [08_Advanced](Trees/README.md#08_advanced) | 2 | DSU on tree, tree hashing |
 
 ## Pick the Right Algo (Graphs)
 
@@ -74,6 +89,18 @@ DSARevision/
 | Critical edge / cut vertex | Bridges / articulation points |
 | Max flow / matching | Dinic |
 | Boolean constraints (A ∨ B) | 2-SAT |
+
+## Pick the Right Algo (Trees)
+
+| Problem hint | Reach for |
+|--------------|-----------|
+| Parent / depth / subtree | [Tree DFS](Trees/01_Basics/treeDfs.cpp) |
+| Longest path | [Diameter](Trees/02_Properties/diameter.cpp) |
+| LCA / distance | [Binary Lifting](Trees/03_PathQueries/lca.cpp) |
+| Subtree as range | [Euler Tour](Trees/04_Flattening/eulerTour.cpp) |
+| Path queries | [HLD](Trees/05_QueriesOnTree/hld.cpp) + SegmentTree |
+| k special nodes | [Virtual Tree](Trees/05_QueriesOnTree/virtualTree.cpp) |
+| Take/skip on tree | [Tree DP](Trees/07_TreeDP/basicTreeDp.cpp) |
 
 ## Adding New Templates
 

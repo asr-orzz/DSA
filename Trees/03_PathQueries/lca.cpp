@@ -4,8 +4,8 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-// Time: O(N log N) preprocess, O(1) / O(log N) query
-// Binary Lifting LCA on a tree
+// Time: O(N log N) preprocess, O(log N) query
+// Binary Lifting: LCA, k-th ancestor, distance, k-th node on path
 int n,q,LOG;
 vector<vector<int>> graph,up;
 vector<int> depth;
@@ -21,6 +21,18 @@ void dfs(int node,int par){
         depth[t]=depth[node]+1;
         dfs(t,node);
     }
+}
+
+int kthAncestor(int node,int k){
+    for(int j=0;j<LOG;j++){
+        if(k&(1<<j)) node=up[node][j];
+    }
+    return node; // 0 if jumped above root
+}
+
+bool isAncestor(int u,int v){
+    // is u ancestor of v ?
+    return kthAncestor(v,depth[v]-depth[u])==u;
 }
 
 int lca(int a,int b){
@@ -40,6 +52,21 @@ int lca(int a,int b){
         }
     }
     return up[a][0];
+}
+
+int dist(int a,int b){
+    int c = lca(a,b);
+    return depth[a]+depth[b]-2*depth[c];
+}
+
+int kthOnPath(int a,int b,int k){
+    // 0-indexed k from a towards b; k must be <= dist(a,b)
+    int c = lca(a,b);
+    int da = depth[a]-depth[c];
+    if(k<=da) return kthAncestor(a,k);
+    k -= da;
+    int db = depth[b]-depth[c];
+    return kthAncestor(b,db-k);
 }
 
 int main() {
@@ -69,6 +96,7 @@ int main() {
         int a,b;
         cin>>a>>b;
         cout<<lca(a,b)<<"\n";
+        // dist(a,b), kthOnPath(a,b,k), isAncestor(u,v)
     }
 
     return 0;
