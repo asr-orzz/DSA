@@ -1,6 +1,6 @@
 # Trees
 
-Tree-specific algorithms. Study top-down (`01` → `08`). **Prefer DFS** on trees unless level-order is explicitly needed.
+Tree-specific algorithms. Study top-down (`01` → `08`).
 
 For **BFS/DFS on graphs** see [Graphs/01_Traversal](../Graphs/README.md#01_traversal).  
 For **range queries on flattened trees** use Euler tour / HLD here, then plug in **SegmentTree** (separate folder, coming soon).
@@ -15,7 +15,7 @@ For **range queries on flattened trees** use Euler tour / HLD here, then plug in
 
 | Algo | File | What it does | Typical use |
 |------|------|--------------|-------------|
-| Diameter | [diameter.cpp](02_Properties/diameter.cpp) | Longest path via 2× DFS | Tree width, farthest pair |
+| Diameter | [diameter.cpp](02_Properties/diameter.cpp) | Longest path via 2× BFS/DFS | Tree width, farthest pair |
 | Center | [center.cpp](02_Properties/center.cpp) | Node(s) with min eccentricity | Optimal meeting point |
 | Centroid | [centroid.cpp](02_Properties/centroid.cpp) | Node where no subtree > n/2 | Balance split, centroid decomp base |
 

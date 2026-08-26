@@ -6,7 +6,7 @@ typedef long double ld;
 
 // Time: O(N)
 // Root tree at 1: parent, depth, height, subtree size
-// Trees prefer DFS (same info as BFS; easier for DP / reroot / aggregates)
+// For BFS on trees see Graphs/01_Traversal/bfs.cpp
 int n;
 vector<vector<int>> graph;
 vector<int> par,depth,height,subtree;
