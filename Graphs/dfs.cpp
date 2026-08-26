@@ -7,13 +7,15 @@ typedef long double ld;
 int n,m;
 vector<vector<int>> graph;
 vector<int> vis;
+vector<int> topo;
+bool cycle = false;
 
 void dfs(int node,int par){
 
     vis[node]=2;
     for(auto t : graph[node]){
 
-        if(t==par) continue; //for undirected graph only
+        // if(t==par) continue; //for undirected graph only
 
         if(vis[t]==1){ //forward edge
             dfs(t,node);
@@ -21,6 +23,7 @@ void dfs(int node,int par){
 
         else if (vis[t]==2){ //back-edge
             //cycle-detected
+            cycle = true;
         }   
 
         else{
@@ -28,6 +31,7 @@ void dfs(int node,int par){
         }   
     }
     vis[node]=3;
+    topo.push_back(node);
 }
 
 int main() {
@@ -40,13 +44,24 @@ int main() {
     vis.assign(n+1,1);
     graph.resize(n+1);
 
+
     for(int i=0;i<m;i++){
         int u,v;
         cin>>u>>v;
         graph[u].push_back(v);
     }
 
-    dfs(1,0);
+    for(int i=1;i<=n;i++){
+        if(vis[i]==1) dfs(i,0);
+    }
+    
+    if(cycle){
+        //cycle-detected not DAG
+    }
+    else{
+        reverse(topo.begin(),topo.end());
+        for(int i=0;i<n;i++) cout<<topo[i]<<" ";
+    }
  
 
     return 0;
