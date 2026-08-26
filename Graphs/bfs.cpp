@@ -4,6 +4,8 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+// Time: O(V + E)
+
 int n,m;
 vector<vector<int>> graph;
 vector<int> dist;

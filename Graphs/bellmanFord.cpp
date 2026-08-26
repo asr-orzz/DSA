@@ -4,6 +4,7 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+// Time: O(V * E)
 // relax all edges (n-1) times
 // works for Negative Edges and NegativeCycles
 const ll INF = 1e18;
@@ -22,7 +23,7 @@ void bellmanFord(int source){
 
         for(int j=1;j<=n;j++){
 
-            if(dist[j]==INF) continue; // very importatn
+            if(dist[j]==INF) continue; // very important
 
             for(auto t : graph[j]){
                 int cur = t.first;

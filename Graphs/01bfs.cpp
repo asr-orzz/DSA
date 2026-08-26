@@ -4,7 +4,8 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-//https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/description/
+// Time: O(V + E)
+// https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/description/
 int n,m;
 vector<vector<pair<int,int>>> graph;
 vector<int> dist;

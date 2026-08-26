@@ -4,7 +4,8 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-//does not work on Negative Weights
+// Time: O((V + E) log V) with binary heap
+// does not work on Negative Weights
 int n,m;
 vector<vector<pair<int,int>>> graph;
 vector<int> dist;
