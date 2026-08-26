@@ -5,25 +5,16 @@ typedef long long ll;
 typedef long double ld;
 
 // Time: O(N)
-// Tree diameter via two DFS/BFS from farthest node
+// Tree diameter via two DFS from farthest node
 int n;
 vector<vector<int>> graph;
 vector<int> dist;
 
-void bfs(int src){
-    fill(dist.begin(),dist.end(),-1);
-    queue<int> q;
-    q.push(src);
-    dist[src]=0;
-
-    while(!q.empty()){
-        int node = q.front();
-        q.pop();
-        for(auto t : graph[node]){
-            if(dist[t]!=-1) continue;
-            dist[t]=dist[node]+1;
-            q.push(t);
-        }
+void dfsDist(int node,int p,int d){
+    dist[node]=d;
+    for(auto t : graph[node]){
+        if(t==p) continue;
+        dfsDist(t,node,d+1);
     }
 }
 
@@ -42,7 +33,7 @@ int main() {
  
     cin>>n;
     graph.resize(n+1);
-    dist.assign(n+1,-1);
+    dist.assign(n+1,0);
 
     for(int i=0;i<n-1;i++){
         int u,v;
@@ -51,9 +42,9 @@ int main() {
         graph[v].push_back(u);
     }
 
-    bfs(1);
+    dfsDist(1,0,0);
     int u = farthest();
-    bfs(u);
+    dfsDist(u,0,0);
     int v = farthest();
     int diameter = dist[v]; // length of longest path = u ... v
 
