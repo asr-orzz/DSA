@@ -5,7 +5,7 @@ typedef long long ll;
 typedef long double ld;
 
 //for topological Ordering on DAG
-
+//remove indegree==0 nodes until all removed 
 int n,m;
 vector<vector<int>> graph;
 vector<int> indegree;
