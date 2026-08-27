@@ -98,7 +98,7 @@ DSARevision/
 | Longest path | [Diameter](Trees/02_Properties/diameter.cpp) |
 | LCA / distance | [Binary Lifting](Trees/03_PathQueries/lca.cpp) |
 | Subtree as range | [Euler Tour](Trees/04_Flattening/eulerTour.cpp) |
-| Path queries | [HLD](Trees/05_QueriesOnTree/hld.cpp) + SegmentTree |
+| Path as O(log N) chains | [HLD](Trees/05_QueriesOnTree/hld.cpp) |
 | k special nodes | [Virtual Tree](Trees/05_QueriesOnTree/virtualTree.cpp) |
 | Take/skip on tree | [Tree DP](Trees/07_TreeDP/basicTreeDp.cpp) |
 

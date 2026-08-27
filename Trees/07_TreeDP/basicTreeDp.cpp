@@ -5,14 +5,15 @@ typedef long long ll;
 typedef long double ld;
 
 // Time: O(N)
-// Basic Tree DP — max independent set (take / skip each node)
+// Tree DP — max independent set
+// dp0 = skip node, dp1 = take node
 int n;
 vector<vector<int>> graph;
-vector<ll> dp0,dp1; // dp0=skip, dp1=take
+vector<ll> dp0,dp1;
 
 void dfs(int node,int p){
     dp0[node]=0;
-    dp1[node]=1; // or node value
+    dp1[node]=1; // or value[node]
 
     for(auto t : graph[node]){
         if(t==p) continue;

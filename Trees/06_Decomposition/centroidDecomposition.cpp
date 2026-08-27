@@ -4,12 +4,11 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-// Time: O(N log N) total for full decomposition
-// Centroid Decomposition: divide tree at centroids recursively
+// Time: O(N log N)
+// Centroid Decomposition
 int n;
 vector<vector<int>> graph;
 vector<int> subtree,vis;
-vector<ll> ans;
 
 void dfsSize(int node,int p){
     subtree[node]=1;
@@ -28,11 +27,11 @@ int dfsCentroid(int node,int p,int total){
     return node;
 }
 
-void collect(int node,int p,int dist,vector<ll>& buf){
-    buf.push_back(dist);
+void collect(int node,int p,int d,vector<int> &buf){
+    buf.push_back(d);
     for(auto t : graph[node]){
         if(t==p || vis[t]) continue;
-        collect(t,node,dist+1,buf);
+        collect(t,node,d+1,buf);
     }
 }
 
@@ -42,14 +41,11 @@ void decompose(int entry){
     vis[c]=1;
 
     // process paths through centroid c
-    vector<ll> all;
     for(auto t : graph[c]){
         if(vis[t]) continue;
-        vector<ll> childDist;
+        vector<int> childDist;
         collect(t,c,1,childDist);
-        // combine childDist with all for cross-subtree pairs
-        for(auto d : childDist) ans[c]+=d; // example aggregate
-        for(auto d : childDist) all.push_back(d);
+        // combine with previous children for cross-subtree pairs
     }
 
     for(auto t : graph[c]){
@@ -66,7 +62,6 @@ int main() {
     graph.resize(n+1);
     subtree.assign(n+1,0);
     vis.assign(n+1,0);
-    ans.assign(n+1,0);
 
     for(int i=0;i<n-1;i++){
         int u,v;

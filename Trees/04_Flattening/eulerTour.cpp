@@ -5,28 +5,21 @@ typedef long long ll;
 typedef long double ld;
 
 // Time: O(N)
-// Euler tour: tin/tout timestamps
-// Subtree of v = all nodes u with tin[u] in [tin[v], tout[v]]
-// Flat array euler[] for range queries (use SegmentTree folder separately)
+// Euler Tour: tin/tout
+// u in subtree of v  <=>  tin[v] <= tin[u] && tout[u] <= tout[v]
 int n,timer=0;
 vector<vector<int>> graph;
-vector<int> tin,tout,euler,par;
+vector<int> tin,tout,par;
 
 void dfs(int node,int p){
     par[node]=p;
     tin[node]=++timer;
-    euler.push_back(node);
 
     for(auto t : graph[node]){
         if(t==p) continue;
         dfs(t,node);
     }
     tout[node]=timer;
-}
-
-bool inSubtree(int u,int v){
-    // is u in subtree of v ?
-    return tin[v]<=tin[u] && tout[u]<=tout[v];
 }
 
 int main() {
@@ -39,7 +32,6 @@ int main() {
     tin.assign(n+1,0);
     tout.assign(n+1,0);
     par.assign(n+1,0);
-    euler.reserve(n);
 
     for(int i=0;i<n-1;i++){
         int u,v;
@@ -50,7 +42,7 @@ int main() {
 
     dfs(1,0);
 
-    // subtree range of v: [tin[v], tout[v]] on euler order / node array
+    // subtree of v = nodes with tin in [tin[v], tout[v]]
 
     return 0;
 }

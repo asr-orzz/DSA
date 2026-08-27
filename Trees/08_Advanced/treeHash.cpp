@@ -5,7 +5,7 @@ typedef long long ll;
 typedef long double ld;
 
 // Time: O(N)
-// Tree hashing — compare subtrees / detect isomorphism
+// Tree hashing — compare rooted subtrees
 int n;
 const ll MOD = 1e9+7;
 const ll BASE = 911382323;
@@ -14,12 +14,13 @@ vector<vector<int>> graph;
 vector<ll> hashVal;
 
 void dfs(int node,int p){
-    hashVal[node]=BASE; // or hash of node label
+    hashVal[node]=1;
     for(auto t : graph[node]){
         if(t==p) continue;
         dfs(t,node);
         hashVal[node] = (hashVal[node]*BASE + hashVal[t])%MOD;
     }
+    hashVal[node] = (hashVal[node]*BASE + 1)%MOD;
 }
 
 int main() {
@@ -41,7 +42,6 @@ int main() {
     dfs(1,0);
 
     // hashVal[v] identifies rooted subtree at v
-    // reroot / compare pairs for isomorphism checks
 
     return 0;
 }

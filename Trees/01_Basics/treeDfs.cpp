@@ -6,7 +6,6 @@ typedef long double ld;
 
 // Time: O(N)
 // Root tree at 1: parent, depth, height, subtree size
-// For BFS on trees see Graphs/01_Traversal/bfs.cpp
 int n;
 vector<vector<int>> graph;
 vector<int> par,depth,height,subtree;
@@ -45,9 +44,6 @@ int main() {
     }
 
     dfs(1,0);
-
-    // par[v], depth[v], height[v], subtree[v] ready
-    // subtree aggregate example: sum of values in subtree via another dfs
 
     return 0;
 }

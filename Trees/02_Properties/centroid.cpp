@@ -8,8 +8,7 @@ typedef long double ld;
 // Centroid = node where every subtree size <= n/2
 int n;
 vector<vector<int>> graph;
-vector<int> subtree;
-vector<int> vis;
+vector<int> subtree,vis;
 
 void dfsSize(int node,int p){
     subtree[node]=1;

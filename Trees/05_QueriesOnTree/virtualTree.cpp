@@ -4,10 +4,10 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-// Time: O(k log k) build, O(k) edges in virtual tree
-// Virtual tree for k special nodes — uses LCA + monotonic stack
-int n,kNodes,LOG;
-vector<vector<int>> graph,up;
+// Time: O(k log k) build
+// Virtual Tree for k special nodes (LCA + stack)
+int n,k,LOG;
+vector<vector<int>> graph,up,vtree;
 vector<int> depth,tin;
 int timer=0;
 
@@ -27,11 +27,14 @@ void dfs(int node,int par){
 
 int lca(int a,int b){
     if(depth[a]<depth[b]) swap(a,b);
+
     int diff=depth[a]-depth[b];
     for(int j=0;j<LOG;j++){
         if(diff&(1<<j)) a=up[a][j];
     }
+
     if(a==b) return a;
+
     for(int j=LOG-1;j>=0;j--){
         if(up[a][j]!=up[b][j]){
             a=up[a][j];
@@ -41,46 +44,49 @@ int lca(int a,int b){
     return up[a][0];
 }
 
-vector<vector<int>> buildVirtualTree(vector<int> nodes){
-    sort(nodes.begin(),nodes.end(),[&](int a,int b){
+void addEdge(int a,int b){
+    vtree[a].push_back(b);
+    vtree[b].push_back(a);
+}
+
+void buildVT(vector<int> nodes){
+    sort(nodes.begin(),nodes.end(),[](int a,int b){
         return tin[a]<tin[b];
     });
 
-    vector<int> st;
-    vector<vector<int>> vtree;
+    int sz=nodes.size();
+    for(int i=0;i<sz-1;i++) nodes.push_back(lca(nodes[i],nodes[i+1]));
 
-    auto addNode=[&](int x){
-        if((int)vtree.size()<=x) vtree.resize(x+1);
-    };
+    sort(nodes.begin(),nodes.end(),[](int a,int b){
+        return tin[a]<tin[b];
+    });
+    nodes.erase(unique(nodes.begin(),nodes.end()),nodes.end());
+
+    vtree.assign(n+1,vector<int>());
+    vector<int> st;
 
     for(auto x : nodes){
-        addNode(x);
-        if(st.empty()){
-            st.push_back(x);
-            continue;
+        while((int)st.size()>=2){
+            int c = lca(st.back(),x);
+            if(depth[c]>=depth[st[(int)st.size()-2]]) break;
+            addEdge(st[(int)st.size()-2],st.back());
+            st.pop_back();
         }
-        int c = lca(st.back(),x);
-        addNode(c);
-        if(c!=st.back()){
-            while((int)st.size()>=2 && depth[st[(int)st.size()-2]]>=depth[c]){
-                int a=st.back(); st.pop_back();
-                int b=st.back();
-                vtree[a].push_back(b);
-                vtree[b].push_back(a);
+        if(!st.empty()){
+            int c = lca(st.back(),x);
+            if(c!=st.back()){
+                addEdge(c,st.back());
+                st.pop_back();
+                st.push_back(c);
             }
-            if(st.back()!=c) st.push_back(c);
         }
         st.push_back(x);
     }
 
     while((int)st.size()>1){
-        int a=st.back(); st.pop_back();
-        int b=st.back();
-        vtree[a].push_back(b);
-        vtree[b].push_back(a);
+        addEdge(st[(int)st.size()-2],st.back());
+        st.pop_back();
     }
-
-    return vtree;
 }
 
 int main() {
@@ -106,12 +112,12 @@ int main() {
 
     dfs(1,-1);
 
-    cin>>kNodes;
-    vector<int> nodes(kNodes);
-    for(int i=0;i<kNodes;i++) cin>>nodes[i];
+    cin>>k;
+    vector<int> nodes(k);
+    for(int i=0;i<k;i++) cin>>nodes[i];
 
-    vector<vector<int>> vtree = buildVirtualTree(nodes);
-    // run DP / dfs on vtree (much smaller than full tree)
+    buildVT(nodes);
+    // now dfs / dp on vtree
 
     return 0;
 }

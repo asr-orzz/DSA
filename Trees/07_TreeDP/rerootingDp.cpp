@@ -5,7 +5,7 @@ typedef long long ll;
 typedef long double ld;
 
 // Time: O(N)
-// Rerooting DP — sum of distances from every node as root
+// Rerooting DP — sum of distances from every root
 int n;
 vector<vector<int>> graph;
 vector<int> subtree;
@@ -32,7 +32,7 @@ void dfs1(int node,int p){
 void dfs2(int node,int p){
     for(auto t : graph[node]){
         if(t==p) continue;
-        // remove t's contribution from node, add rest of tree to t
+        // reroot from node to t
         dpAll[t]=dpAll[node]-subtree[t]+(n-subtree[t]);
         dfs2(t,node);
     }

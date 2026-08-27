@@ -5,8 +5,8 @@ typedef long long ll;
 typedef long double ld;
 
 // Time: O(N)
-// Tree center = node(s) with minimum eccentricity (min max distance to any node)
-// At most 2 centers; lie on diameter
+// Center = node(s) with min eccentricity
+// at most 2 centers; lie on diameter
 int n;
 vector<vector<int>> graph;
 vector<int> dist;
@@ -20,6 +20,7 @@ void bfs(int src){
     while(!q.empty()){
         int node = q.front();
         q.pop();
+
         for(auto t : graph[node]){
             if(dist[t]!=-1) continue;
             dist[t]=dist[node]+1;

@@ -4,19 +4,18 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-// Time: O(N log N) — small-to-large merging on tree
-// DSU on Tree: efficient subtree frequency / distinct queries
+// Time: O(N log N)
+// DSU on Tree (Sack) — small-to-large
 int n;
 vector<vector<int>> graph;
-vector<int> subtree,heavy,euler,first;
-vector<int> freq,ans;
-vector<int> col;
-int timer=0;
+vector<int> subtree,heavy,col,freq,ans;
+int curDistinct=0;
 
 void dfsSize(int node,int p){
     subtree[node]=1;
     heavy[node]=-1;
     int best=0;
+
     for(auto t : graph[node]){
         if(t==p) continue;
         dfsSize(t,node);
@@ -28,50 +27,46 @@ void dfsSize(int node,int p){
     }
 }
 
-void addSubtree(int node,int p,int h,bool keep){
-    freq[col[node]]++;
-    // update ans from freq change
-
-    for(auto t : graph[node]){
-        if(t==p || t==h) continue;
-        addSubtree(t,node,h,keep);
+void add(int node,int p,int x){
+    // x = +1 add, x = -1 remove
+    if(x==1){
+        if(freq[col[node]]==0) curDistinct++;
+        freq[col[node]]++;
+    }
+    else{
+        freq[col[node]]--;
+        if(freq[col[node]]==0) curDistinct--;
     }
 
-    if(!keep){
-        while(timer>first[node]){
-            timer--;
-            freq[col[euler[timer]]]--;
-        }
+    for(auto t : graph[node]){
+        if(t==p) continue;
+        add(t,node,x);
     }
 }
 
-void dfs(int node,int p,bool keep){
+void dfs(int node,int p,int keep){
+    // light children first — discard
     for(auto t : graph[node]){
         if(t==p || t==heavy[node]) continue;
         dfs(t,node,0);
     }
 
+    // heavy child — keep
     if(heavy[node]!=-1) dfs(heavy[node],node,1);
 
-    addSubtree(node,p,heavy[node],1);
-    ans[node]=0; // replace with answer derived from freq
+    // add node + light subtrees
+    if(freq[col[node]]==0) curDistinct++;
+    freq[col[node]]++;
 
-    if(!keep){
-        while(timer>first[node]){
-            timer--;
-            freq[col[euler[timer]]]--;
-        }
-    }
-}
-
-void dfsEuler(int node,int p){
-    first[node]=timer;
-    euler[timer++]=node;
-    if(heavy[node]!=-1) dfsEuler(heavy[node],node);
     for(auto t : graph[node]){
         if(t==p || t==heavy[node]) continue;
-        dfsEuler(t,node);
+        add(t,node,1);
     }
+
+    ans[node]=curDistinct;
+
+    // if not keep — remove whole subtree
+    if(!keep) add(node,p,-1);
 }
 
 int main() {
@@ -83,11 +78,9 @@ int main() {
     graph.resize(n+1);
     subtree.assign(n+1,0);
     heavy.assign(n+1,-1);
-    euler.assign(n+1,0);
-    first.assign(n+1,0);
+    col.assign(n+1,0);
     freq.assign(n+1,0);
     ans.assign(n+1,0);
-    col.assign(n+1,0);
 
     for(int i=1;i<=n;i++) cin>>col[i];
 
@@ -99,7 +92,6 @@ int main() {
     }
 
     dfsSize(1,0);
-    dfsEuler(1,0);
     dfs(1,0,1);
 
     return 0;
