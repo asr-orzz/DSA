@@ -19,10 +19,10 @@ void dfsSize(int node,int p){
     }
 }
 
-int dfsCentroid(int node,int p,int total){
+int dfsCentroid(int node,int p){
     for(auto t : graph[node]){
         if(t==p) continue;
-        if(subtree[t]>total/2) return dfsCentroid(t,node,total);
+        if(subtree[t]>n/2) return dfsCentroid(t,node);
     }
     return node;
 }
@@ -44,7 +44,7 @@ int main() {
     }
 
     dfsSize(1,0);
-    int centroid = dfsCentroid(1,0,n);
+    int centroid = dfsCentroid(1,0);
 
     return 0;
 }
