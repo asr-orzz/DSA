@@ -8,12 +8,12 @@ typedef long double ld;
 // Centroid = node where every subtree size <= n/2
 int n;
 vector<vector<int>> graph;
-vector<int> subtree,vis;
+vector<int> subtree;
 
 void dfsSize(int node,int p){
     subtree[node]=1;
     for(auto t : graph[node]){
-        if(t==p || vis[t]) continue;
+        if(t==p) continue;
         dfsSize(t,node);
         subtree[node]+=subtree[t];
     }
@@ -21,7 +21,7 @@ void dfsSize(int node,int p){
 
 int dfsCentroid(int node,int p,int total){
     for(auto t : graph[node]){
-        if(t==p || vis[t]) continue;
+        if(t==p) continue;
         if(subtree[t]>total/2) return dfsCentroid(t,node,total);
     }
     return node;
@@ -35,7 +35,6 @@ int main() {
     cin>>n;
     graph.resize(n+1);
     subtree.assign(n+1,0);
-    vis.assign(n+1,0);
 
     for(int i=0;i<n-1;i++){
         int u,v;
