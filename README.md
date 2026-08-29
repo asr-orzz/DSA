@@ -8,6 +8,7 @@ Competitive programming / interview revision templates in C++. Each file is a mi
 - Graph algos: [`Graphs/README.md`](Graphs/README.md)
 - Tree algos (CP, adjacency list): [`Trees/README.md`](Trees/README.md)
 - Binary trees (interview, pointer-based): [`BinaryTrees/README.md`](BinaryTrees/README.md)
+- Bit manipulation: [`BitManipulation/README.md`](BitManipulation/README.md)
 
 ## Structure
 
@@ -30,15 +31,23 @@ DSARevision/
 │   ├── 06_Decomposition/
 │   ├── 07_TreeDP/
 │   └── 08_Advanced/
-└── BinaryTrees/          # pointer-based binary trees (interview / LeetCode)
+├── BinaryTrees/          # pointer-based binary trees (interview / LeetCode)
+│   ├── 01_Basics/
+│   ├── 02_Traversals/
+│   ├── 03_BasicProblems/
+│   ├── 04_PathProblems/
+│   ├── 05_Construction/
+│   ├── 06_Views/
+│   ├── 07_BST/
+│   └── 08_Advanced/
+└── BitManipulation/      # bit tricks, XOR, bitmask DP
     ├── 01_Basics/
-    ├── 02_Traversals/
-    ├── 03_BasicProblems/
-    ├── 04_PathProblems/
-    ├── 05_Construction/
-    ├── 06_Views/
-    ├── 07_BST/
-    └── 08_Advanced/
+    ├── 02_Tricks/
+    ├── 03_XOR/
+    ├── 04_Subsets/
+    ├── 05_Contribution/
+    ├── 06_BitmaskDP/
+    └── 07_XORTrie/
 ```
 
 ## How to Study
@@ -96,6 +105,18 @@ DSARevision/
 | [06_Views](BinaryTrees/README.md#06_views) | 4 | left/right, top/bottom, vertical, boundary |
 | [07_BST](BinaryTrees/README.md#07_bst) | 6 | search, insert, delete, validate, kth, LCA |
 | [08_Advanced](BinaryTrees/README.md#08_advanced) | 1 | flatten |
+
+### [BitManipulation](BitManipulation/README.md) — 13 templates
+
+| Section | Count | Covers |
+|---------|-------|--------|
+| [01_Basics](BitManipulation/README.md#01_basics) | 1 | get/set/clear/toggle bit, power-of-two |
+| [02_Tricks](BitManipulation/README.md#02_tricks) | 1 | popcount, lowbit, clz/ctz, XOR swap |
+| [03_XOR](BitManipulation/README.md#03_xor) | 3 | single number, XOR range, missing number |
+| [04_Subsets](BitManipulation/README.md#04_subsets) | 2 | subset + submask enumeration |
+| [05_Contribution](BitManipulation/README.md#05_contribution) | 1 | per-bit contribution technique |
+| [06_BitmaskDP](BitManipulation/README.md#06_bitmaskdp) | 3 | TSP, assignment, SOS DP |
+| [07_XORTrie](BitManipulation/README.md#07_xortrie) | 1 | max XOR pair |
 
 ## Pick the Right Algo (Graphs)
 
