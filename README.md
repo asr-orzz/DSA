@@ -6,7 +6,8 @@ Competitive programming / interview revision templates in C++. Each file is a mi
 
 - Base boilerplate: [`template.cpp`](template.cpp)
 - Graph algos: [`Graphs/README.md`](Graphs/README.md)
-- Tree algos: [`Trees/README.md`](Trees/README.md)
+- Tree algos (CP, adjacency list): [`Trees/README.md`](Trees/README.md)
+- Binary trees (interview, pointer-based): [`BinaryTrees/README.md`](BinaryTrees/README.md)
 
 ## Structure
 
@@ -20,14 +21,23 @@ DSARevision/
 │   ├── 04_MST/
 │   ├── 05_Connectivity/
 │   └── 06_Advanced/
-└── Trees/                # tree-specific algorithms (separate from Graphs)
+├── Trees/                # CP rooted trees (adjacency list)
+│   ├── 01_Basics/
+│   ├── 02_Properties/
+│   ├── 03_PathQueries/
+│   ├── 04_Flattening/
+│   ├── 05_QueriesOnTree/
+│   ├── 06_Decomposition/
+│   ├── 07_TreeDP/
+│   └── 08_Advanced/
+└── BinaryTrees/          # pointer-based binary trees (interview / LeetCode)
     ├── 01_Basics/
-    ├── 02_Properties/
-    ├── 03_PathQueries/
-    ├── 04_Flattening/
-    ├── 05_QueriesOnTree/
-    ├── 06_Decomposition/
-    ├── 07_TreeDP/
+    ├── 02_Traversals/
+    ├── 03_BasicProblems/
+    ├── 04_PathProblems/
+    ├── 05_Construction/
+    ├── 06_Views/
+    ├── 07_BST/
     └── 08_Advanced/
 ```
 
@@ -73,6 +83,19 @@ DSARevision/
 | [06_Decomposition](Trees/README.md#06_decomposition) | 1 | Centroid decomposition |
 | [07_TreeDP](Trees/README.md#07_treedp) | 2 | Basic tree DP, rerooting DP |
 | [08_Advanced](Trees/README.md#08_advanced) | 2 | DSU on tree, tree hashing |
+
+### [BinaryTrees](BinaryTrees/README.md) — 26 templates
+
+| Section | Count | Covers |
+|---------|-------|--------|
+| [01_Basics](BinaryTrees/README.md#01_basics) | 1 | Node struct + build |
+| [02_Traversals](BinaryTrees/README.md#02_traversals) | 6 | pre/in/post (rec+iter), level, zigzag, Morris |
+| [03_BasicProblems](BinaryTrees/README.md#03_basicproblems) | 6 | height, count, diameter, same, balanced, symmetric |
+| [04_PathProblems](BinaryTrees/README.md#04_pathproblems) | 4 | root-to-leaf, max path sum, LCA, distance |
+| [05_Construction](BinaryTrees/README.md#05_construction) | 3 | build from in+pre / in+post, serialize |
+| [06_Views](BinaryTrees/README.md#06_views) | 4 | left/right, top/bottom, vertical, boundary |
+| [07_BST](BinaryTrees/README.md#07_bst) | 6 | search, insert, delete, validate, kth, LCA |
+| [08_Advanced](BinaryTrees/README.md#08_advanced) | 1 | flatten |
 
 ## Pick the Right Algo (Graphs)
 
