@@ -8,7 +8,7 @@ public:
     int min_freq;
     int capacity;
 
-    unordered_map<int, pair<int, int>> cache; 
+    unordered_map<int, pair<int, int>> cache;
     // key -> {value, frequency}
 
     unordered_map<int, list<int>::iterator> freqIter;
@@ -23,13 +23,8 @@ public:
     }
 
 
-    int get(int key) {
+    void touch(int key) {
 
-        if (cache.find(key) == cache.end()) {
-            return -1;
-        }
-
-        int val = cache[key].first;
         int f = cache[key].second;
 
         // remove from old frequency list
@@ -38,20 +33,28 @@ public:
         // increase frequency
         cache[key].second++;
 
-        f++;
-
         // add to new frequency list
-        freq[f].push_back(key);
+        freq[f + 1].push_back(key);
 
         // update iterator
-        freqIter[key] = --freq[f].end();
+        freqIter[key] = --freq[f + 1].end();
 
-        // if old minimum frequency became empty
+        // update minimum frequency
         if (freq[min_freq].size() == 0) {
             min_freq++;
         }
+    }
 
-        return val;
+
+    int get(int key) {
+
+        if (cache.find(key) == cache.end()) {
+            return -1;
+        }
+
+        touch(key);
+
+        return cache[key].first;
     }
 
 
@@ -60,64 +63,41 @@ public:
         // key already exists
         if (cache.find(key) != cache.end()) {
 
-            int f = cache[key].second;
-
-            // remove from old frequency list
-            freq[f].erase(freqIter[key]);
-
-            // increase frequency
-            cache[key].second++;
-
-            f++;
-
-            // add to new frequency list
-            freq[f].push_back(key);
-
-            // update iterator
-            freqIter[key] = --freq[f].end();
-
-            // if minimum frequency list became empty
-            if (freq[min_freq].size() == 0) {
-                min_freq++;
-            }
-
-            // update value
             cache[key].first = value;
+
+            touch(key);
+
+            return;
         }
 
-        else {
 
-            // cache is full
-            if (siz == capacity) {
+        // cache is full
+        if (siz == capacity) {
 
-                // least frequently used key
-                int key_del = freq[min_freq].front();
+            int key_del = freq[min_freq].front();
 
-                // remove from cache
-                cache.erase(key_del);
+            cache.erase(key_del);
 
-                // remove its iterator
-                freqIter.erase(key_del);
+            freqIter.erase(key_del);
 
-                // remove from frequency list
-                freq[min_freq].pop_front();
+            freq[min_freq].pop_front();
 
-                siz--;
-            }
-
-            // insert new key
-            cache[key] = {value, 1};
-
-            freq[1].push_back(key);
-
-            freqIter[key] = --freq[1].end();
-
-            // new key always has frequency 1
-            min_freq = 1;
-
-            siz++;
+            siz--;
         }
+
+
+        // insert new key
+        cache[key] = {value, 1};
+
+        freq[1].push_back(key);
+
+        freqIter[key] = --freq[1].end();
+
+        min_freq = 1;
+
+        siz++;
     }
+
 };
 
 
