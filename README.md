@@ -121,11 +121,12 @@ When you add a file: match the folder’s style, keep the implementation minimal
 | [06_BitmaskDP](BitManipulation/README.md#06_bitmaskdp) | 3 | TSP, assignment, SOS DP |
 | [07_XORTrie](BitManipulation/README.md#07_xortrie) | 1 | max XOR pair |
 
-### [Maths](Maths/README.md) — 1 template
+### [Maths](Maths/README.md) — 2 templates
 
 | Section | Count | Covers |
 |---------|-------|--------|
 | [01_Primes](Maths/README.md#01_primes) | 1 | Sieve of Eratosthenes |
+| [02_Combinatorics](Maths/README.md#02_combinatorics) | 1 | Derangements |
 
 ### [Greedy](Greedy/README.md) — 1 template
 
