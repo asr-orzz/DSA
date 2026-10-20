@@ -1,10 +1,11 @@
 # Segment Trees
 
-Range-query templates with a binary tree over the array. Start with [basecode.cpp](basecode.cpp), then change merge + identity for other operations.
+Range-query templates with a binary tree over the array. Start with [basecode.cpp](basecode.cpp). The tree skeleton stays the same; you solve most point-update / range-query problems by changing **node** + **merge** (+ identity).
 
 | File | What it does | Typical use |
 |------|--------------|-------------|
 | [basecode.cpp](basecode.cpp) | Point update + range sum | Core segment tree API |
+| [evenOdd.cpp](evenOdd.cpp) | Custom node: even / odd counts | Same API, richer node; pattern for min+max, gcd+cnt, … |
 
 ## Complexity
 

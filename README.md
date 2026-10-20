@@ -144,9 +144,9 @@ KMP, Z-algorithm, rolling hash, Manacher.
 
 Base BIT, frequency table, inversion count, k-th smallest.
 
-### [Segment-Trees](Segment-Trees/README.md) — 1 template
+### [Segment-Trees](Segment-Trees/README.md) — 2 templates
 
-Point update + range sum (swap merge + identity for min / max / XOR / gcd).
+Point update + range sum; custom node (even/odd counts) — same tree, change node + merge.
 
 ### [Algorithmic-Designs](Algorithmic-Designs/README.md) — 5 templates
 
