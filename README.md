@@ -13,6 +13,7 @@ Competitive programming / interview revision templates in C++. Each file is a mi
 - Greedy: [`Greedy/README.md`](Greedy/README.md)
 - Strings: [`strings/README.md`](strings/README.md)
 - Fenwick tree: [`fenwick-tree/README.md`](fenwick-tree/README.md)
+- Segment trees: [`Segment-Trees/README.md`](Segment-Trees/README.md)
 - Design problems: [`Algorithmic-Designs/README.md`](Algorithmic-Designs/README.md)
 
 ## Structure
@@ -28,6 +29,7 @@ DSARevision/
 ├── Greedy/                     # greedy templates with problem write-ups
 ├── strings/                    # KMP, Z, hashing, Manacher
 ├── fenwick-tree/               # BIT templates
+├── Segment-Trees/              # point update + range query
 └── Algorithmic-Designs/        # LRU, LFU, min stack, snapshot array
 ```
 
@@ -141,6 +143,10 @@ KMP, Z-algorithm, rolling hash, Manacher.
 ### [fenwick-tree](fenwick-tree/README.md) — 4 templates
 
 Base BIT, frequency table, inversion count, k-th smallest.
+
+### [Segment-Trees](Segment-Trees/README.md) — 1 template
+
+Point update + range sum (swap merge + identity for min / max / XOR / gcd).
 
 ### [Algorithmic-Designs](Algorithmic-Designs/README.md) — 5 templates
 
