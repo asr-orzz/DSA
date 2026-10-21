@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long int ll;
+
+int n,q;
+string s;
+
+struct node{
+    int matched;
+    int open;
+    int close;
+
+    node(int m=0,int o=0,int c=0){
+        matched=m;
+        open=o;
+        close=c;
+    }
+};
+
+node merge(node a,node b){
+    int extra = min(a.open,b.close);
+
+    int m = a.matched+b.matched+extra;
+    int o = a.open+b.open-extra;
+    int c = a.close+b.close-extra;
+
+    return node(m,o,c);
+}
+
+vector<node> tree;
+
+void build(int id,int l,int r){
+    if(l==r){
+        if(s[l]=='(')
+            tree[id]=node(0,1,0);
+        else
+            tree[id]=node(0,0,1);
+        return;
+    }
+
+    int mid = (l+r)/2;
+    build(2*id,l,mid);
+    build(2*id+1,mid+1,r);
+
+    tree[id]=merge(tree[2*id],tree[2*id+1]);
+}
+
+node query(int id,int l,int r,int lq,int rq){
+    if(r<lq or l>rq) return node();
+
+    if(lq<=l and r<=rq) return tree[id];
+
+    int mid = (l+r)/2;
+
+    node a = query(2*id,l,mid,lq,rq);
+    node b = query(2*id+1,mid+1,r,lq,rq);
+
+    return merge(a,b);
+}
+
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin>>s;
+    n=s.size();
+
+    cin>>q;
+    tree.resize(4*n);
+
+    build(1,0,n-1);
+
+    while(q--){
+        int l,r;
+        cin>>l>>r;
+        l--;
+        r--;
+
+        node ans = query(1,0,n-1,l,r);
+
+        cout<<2*ans.matched<<"\n";
+    }
+
+    return 0;
+}
