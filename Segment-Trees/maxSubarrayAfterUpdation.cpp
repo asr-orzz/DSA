@@ -1,3 +1,48 @@
+/*
+Problem: Subarray Sum Queries (CSES)
+
+You are given an array of n integers and q queries.
+
+Each query contains two integers k and x:
+    - Update a[k] = x.
+    - After each update, print the maximum subarray sum
+      of the entire array.
+
+A subarray must be contiguous.
+An empty subarray is allowed, so the answer is at least 0.
+
+Input:
+    n q
+    a[0] a[1] ... a[n-1]
+    k x   (q queries, 1-based indexing)
+
+Output:
+    After each update, print the maximum subarray sum.
+
+Approach: Segment Tree
+
+Each node stores:
+    maxVal   = Maximum subarray sum in its segment
+    lSum     = Maximum prefix sum
+    rSum     = Maximum suffix sum
+    totalSum = Sum of all elements in the segment
+
+Merge two children:
+    maxVal = max({left.maxVal, right.maxVal,
+                  left.rSum + right.lSum})
+
+    lSum = max(left.lSum, left.totalSum + right.lSum)
+    rSum = max(right.rSum, right.totalSum + left.rSum)
+    totalSum = left.totalSum + right.totalSum
+
+Time Complexity:
+    Build  : O(n)
+    Update : O(log n)
+    Query  : O(1), answer stored at tree[1].maxVal
+
+Space Complexity: O(n)
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 

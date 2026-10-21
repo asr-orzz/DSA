@@ -1,3 +1,54 @@
+/*
+Problem: Hotel Queries (CSES)
+
+You are given n hotels and q groups of customers.
+
+Each hotel has a[i] available rooms.
+Each group requires X rooms.
+
+For every group:
+    - Find the leftmost hotel having at least X available rooms.
+    - Allocate X rooms to that group.
+    - Decrease that hotel's available rooms by X.
+    - If no hotel has enough rooms, print 0.
+
+Input:
+    n q
+    a[0] a[1] ... a[n-1]
+    X1 X2 ... Xq
+
+Output:
+    For each group, print the 1-based index of the
+    leftmost hotel that can accommodate the group.
+    Print 0 if no such hotel exists.
+
+Approach: Segment Tree (Range Maximum + First >= X)
+
+Each node stores:
+    maxVal = Maximum available rooms in its segment.
+
+Merge two children:
+    maxVal = max(left.maxVal, right.maxVal)
+
+Query(X):
+    - If tree[id].maxVal < X, return -1.
+    - If leaf node, return its index.
+    - If left child maxVal >= X, search left.
+    - Otherwise, search right.
+
+Update(pos, X):
+    a[pos] -= X
+    Update maximum values along the path.
+
+Time Complexity:
+    Build  : O(n)
+    Query  : O(log n)
+    Update : O(log n)
+    Total  : O(n + q log n)
+
+Space Complexity: O(n)
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 

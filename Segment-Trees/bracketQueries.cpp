@@ -1,3 +1,73 @@
+/*
+Problem: Sereja and Brackets (Codeforces 380C)
+
+You are given a bracket sequence s consisting of '(' and ')'
+and q queries.
+
+Each query contains two integers l and r:
+    - Consider the substring s[l...r].
+    - Find the length of the longest correct bracket
+      subsequence within this substring.
+
+A correct bracket subsequence:
+    - Every '(' must be matched with a ')'.
+    - Opening bracket must appear before closing bracket.
+    - Brackets do not need to be contiguous.
+
+Example:
+    s = "(()())"
+    Query: l=1, r=6
+    Answer: 6
+
+    Query: l=2, r=5
+    Substring: "()()"
+    Answer: 4
+
+Input:
+    s
+    q
+    l r  (q queries, 1-based indexing)
+
+Output:
+    For each query, print the maximum length of a
+    correct bracket subsequence.
+
+Approach: Segment Tree (Bracket Matching)
+
+Each node stores:
+    matched = Number of matched bracket pairs.
+    open    = Number of unmatched '(' brackets.
+    close   = Number of unmatched ')' brackets.
+
+Merge two children a (left) and b (right):
+
+    extra = min(a.open, b.close)
+
+    matched = a.matched + b.matched + extra
+    open    = a.open + b.open - extra
+    close   = a.close + b.close - extra
+
+Explanation:
+    - Unmatched '(' from the left child can pair with
+      unmatched ')' from the right child.
+    - extra represents newly formed matching pairs.
+    - Remaining brackets stay unmatched.
+
+Leaf initialization:
+    '(' -> node(0,1,0)
+    ')' -> node(0,0,1)
+
+Query(l,r):
+    - Return the merged node for substring [l,r].
+    - Answer = 2 * matched
+
+Time Complexity:
+    Build : O(n)
+    Query : O(log n)
+    Total : O(n + q log n)
+
+Space Complexity: O(n)
+*/
 #include <bits/stdc++.h>
 using namespace std;
 
