@@ -3,51 +3,7 @@ using namespace std;
 
 typedef long long int ll;
 
-// ------------------------------------------------------------
-// Lazy Queries — Segment Tree with Lazy Propagation
-//
-// Given an array of n integers, process q queries:
-//
-// Type 1: 1 a b x
-//         Increase every element in range [a,b] by x.
-//
-// Type 2: 2 a b x
-//         Set every element in range [a,b] to x.
-//
-// Type 3: 3 a b
-//         Find the sum of elements in range [a,b].
-//
-// Input:
-// n q
-// t1 t2 ... tn
-// q queries of the above three types
-//
-// Constraints:
-// 1 <= n,q <= 2*10^5
-// 1 <= t[i],x <= 10^6
-// 1 <= a <= b <= n
-//
-// Approach:
-// Segment Tree + Lazy Propagation
-//
-// Each node maintains:
-// sum    -> sum of its segment
-// lz1    -> pending range addition
-// lz2    -> pending range assignment
-// hasSet -> whether an assignment is pending
-//
-// Important:
-// 1. Addition accumulates with previous updates.
-// 2. Assignment overrides all previous updates.
-// 3. While pushing, apply assignment first, then addition.
-//
-// Time:  Build O(n)
-//        Each update O(log n)
-//        Each query O(log n)
-//
-// Space: O(n)
-// ------------------------------------------------------------
-
+//https://cses.fi/problemset/task/1735
 int n,q;
 vector<ll> a;
 
